@@ -1,0 +1,111 @@
+---
+interface Props {
+  number: string;
+  name: string;
+  summary: string;
+  state: string;
+  href: string;
+}
+
+import { externalLinkAttrs } from "../utils/links";
+
+const { number, name, summary, state, href } = Astro.props;
+const host = href.replace(/^https?:\/\//, "");
+---
+
+<article class="system-card terminal-record">
+  <div class="system-card__index">
+    <span>{number} //</span>
+  </div>
+  <div class="system-card__body">
+    <h3>SYSTEM://{name}</h3>
+    <p>{summary}</p>
+  </div>
+  <dl>
+    <div>
+      <dt>STATE</dt>
+      <dd>{state}</dd>
+    </div>
+    <div>
+      <dt>LINK</dt>
+      <dd><a href={href} {...externalLinkAttrs(href)}>{host}</a></dd>
+    </div>
+  </dl>
+</article>
+
+<style>
+  .system-card {
+    display: grid;
+    gap: 1rem 1.25rem;
+    padding: clamp(1rem, 3vw, 1.35rem);
+  }
+
+  .system-card__index,
+  dt {
+    color: #fe4700;
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+  }
+
+  .system-card__index {
+    align-self: start;
+  }
+
+  .system-card__body {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  h3 {
+    margin: 0;
+    color: #f4f1ec;
+    font-family: var(--mono);
+    font-size: clamp(1rem, 2vw, 1.35rem);
+    letter-spacing: 0.04em;
+  }
+
+  p {
+    margin: 0;
+    color: #b9b0a8;
+  }
+
+  dl {
+    display: grid;
+    gap: 0.5rem;
+    margin: 0;
+  }
+
+  div {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    border-top: 1px solid rgba(254, 71, 0, 0.14);
+    padding-top: 0.45rem;
+  }
+
+  dd {
+    margin: 0;
+    color: #f4f1ec;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    text-align: right;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: #fe4700;
+  }
+
+  @media (min-width: 820px) {
+    .system-card {
+      grid-template-columns: minmax(4.5rem, 0.12fr) minmax(0, 1fr) minmax(18rem, 0.32fr);
+      align-items: center;
+    }
+  }
+</style>

@@ -1,0 +1,62 @@
+---
+const currentScope = [
+  "public world-data registry",
+  "source-aware entity records",
+  "event and killmail resolution",
+  "API contracts",
+  "source and confidence policy",
+  "operational status reporting",
+];
+---
+
+<section class="section" aria-labelledby="scope-title">
+  <div class="section-head">
+    <span class="section-number">06 //</span>
+    <h2 class="section-title" id="scope-title">SCOPE://CURRENT</h2>
+  </div>
+  <div class="scope-grid">
+    <div class="scope-list terminal-record">
+      <h3>CURRENT</h3>
+      <ul>
+        {currentScope.map((item) => <li>{item}</li>)}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .scope-grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .scope-list {
+    padding: clamp(1rem, 3vw, 1.35rem);
+    border-bottom: 1px solid rgba(254, 71, 0, 0.24);
+  }
+
+  h3 {
+    margin: 0 0 1rem;
+    color: #fe4700;
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    letter-spacing: 0.14em;
+  }
+
+  ul {
+    display: grid;
+    gap: 0.55rem;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  li {
+    color: #b9b0a8;
+  }
+
+  li::before {
+    color: #fe4700;
+    content: "// ";
+  }
+</style>

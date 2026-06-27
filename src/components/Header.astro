@@ -1,0 +1,142 @@
+---
+import { navItems, siteConfig } from "../config/site";
+import { externalLinkAttrs } from "../utils/links";
+---
+
+<header class="site-header" aria-label="Black Relay">
+  <a class="brand" href="/" aria-label="Black Relay home">
+    <img src="/logo.png" alt="" width="48" height="48" />
+    <span>SIG//{siteConfig.name}</span>
+  </a>
+
+  <nav class="desktop-nav" aria-label="Primary">
+    {
+      navItems.map((item) => (
+        <a href={item.href} {...externalLinkAttrs(item.href)}>
+          <span>[</span> {item.label} <span>]</span>
+        </a>
+      ))
+    }
+  </nav>
+
+  <details class="mobile-nav">
+    <summary>MENU</summary>
+    <nav aria-label="Mobile primary">
+      {
+        navItems.map((item) => (
+          <a href={item.href} {...externalLinkAttrs(item.href)}>
+            <span>[</span> {item.label} <span>]</span>
+          </a>
+        ))
+      }
+    </nav>
+  </details>
+</header>
+
+<style>
+  .site-header {
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    width: min(1320px, calc(100% - 2rem));
+    min-height: 4.25rem;
+    margin-inline: auto;
+    padding: 0.65rem clamp(0.85rem, 2vw, 1.35rem);
+    border-inline: 1px solid rgba(254, 71, 0, 0.16);
+    border-bottom: 1px solid rgba(254, 71, 0, 0.16);
+    background:
+      linear-gradient(180deg, rgba(0, 0, 0, 0.96), rgba(0, 0, 0, 0.7)),
+      radial-gradient(circle at 50% 0, rgba(254, 71, 0, 0.12), transparent 26rem);
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #f4f1ec;
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .brand img {
+    width: 2rem;
+    height: 2rem;
+    object-fit: contain;
+    filter: drop-shadow(0 0 12px rgba(254, 71, 0, 0.16));
+  }
+
+  .desktop-nav {
+    display: none;
+    align-items: center;
+    gap: 0.9rem;
+  }
+
+  .desktop-nav a,
+  .mobile-nav a,
+  .mobile-nav summary {
+    color: #9b928a;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition:
+      color 160ms ease,
+      text-shadow 160ms ease;
+  }
+
+  .desktop-nav span,
+  .mobile-nav span {
+    color: #fe4700;
+  }
+
+  .desktop-nav a:hover,
+  .mobile-nav a:hover {
+    color: #f4f1ec;
+    text-shadow: 0 0 12px rgba(254, 71, 0, 0.42);
+  }
+
+  .mobile-nav {
+    position: relative;
+  }
+
+  .mobile-nav summary {
+    list-style: none;
+    padding: 0.55rem 0.7rem;
+    border: 1px solid rgba(254, 71, 0, 0.24);
+  }
+
+  .mobile-nav summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .mobile-nav nav {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 0.65rem);
+    display: grid;
+    gap: 0.75rem;
+    min-width: 13rem;
+    padding: 1rem;
+    border: 1px solid rgba(254, 71, 0, 0.34);
+    background: rgba(0, 0, 0, 0.98);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65);
+  }
+
+  @media (min-width: 860px) {
+    .desktop-nav {
+      display: flex;
+    }
+
+    .mobile-nav {
+      display: none;
+    }
+  }
+</style>

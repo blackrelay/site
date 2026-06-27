@@ -1,0 +1,242 @@
+---
+import AccessPanel from "../components/AccessPanel.astro";
+import EndpointMap from "../components/EndpointMap.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import HeroTerminal from "../components/HeroTerminal.astro";
+import PrincipleCard from "../components/PrincipleCard.astro";
+import ScopePanel from "../components/ScopePanel.astro";
+import SystemCard from "../components/SystemCard.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { siteConfig } from "../config/site";
+import { externalLinkAttrs } from "../utils/links";
+
+const systems = [
+  {
+    number: "01",
+    name: "REGISTRY",
+    summary:
+      "Canonical source-aware world data: entities, systems, items, killmails, structures and source evidence.",
+    state: siteConfig.systemStates.registry,
+    href: siteConfig.endpoints.registry,
+  },
+  {
+    number: "02",
+    name: "API",
+    summary: "Public endpoints for tools, integrations and Black Relay applications.",
+    state: siteConfig.systemStates.api,
+    href: siteConfig.endpoints.api,
+  },
+  {
+    number: "03",
+    name: "API DOCS",
+    summary: "Data model, confidence labels, API reference and changelog.",
+    state: siteConfig.systemStates.docs,
+    href: siteConfig.endpoints.docs,
+  },
+  {
+    number: "04",
+    name: "STATUS",
+    summary: "Indexer freshness, API health, source staleness and incident notes.",
+    state: siteConfig.systemStates.status,
+    href: siteConfig.endpoints.status,
+  },
+];
+
+const principles = [
+  {
+    title: "SOURCE FIRST",
+    body: "Every published record should point back to where it came from.",
+  },
+  {
+    title: "CONFIDENCE LABELLED",
+    body: "Verified, probable, reported, stale and unknown stay visually distinct.",
+  },
+  {
+    title: "PUBLIC BY DEFAULT",
+    body: "Public game data should be usable without private gatekeeping.",
+  },
+  {
+    title: "NO PRIVATE INTEL",
+    body: "Black Relay is not a doxxing system, spy ledger or private operational tracker.",
+  },
+];
+---
+
+<BaseLayout>
+  <Header />
+  <main id="main">
+    <HeroTerminal />
+    <AccessPanel />
+
+    <section class="section" aria-labelledby="systems-title">
+      <div class="section-head">
+        <span class="section-number">02 //</span>
+        <h2 class="section-title" id="systems-title">SYSTEMS ONLINE</h2>
+      </div>
+      <div class="system-ledger">
+        {systems.map((system) => <SystemCard {...system} />)}
+      </div>
+    </section>
+
+    <section class="section mission-section" aria-labelledby="mission-title">
+      <div class="section-head">
+        <span class="section-number">03 //</span>
+        <h2 class="section-title" id="mission-title">MISSION://PUBLIC_SIGNAL</h2>
+      </div>
+      <div class="mission-grid">
+        <div>
+          <p>The frontier speaks in broken signals.</p>
+          <p>
+            A gate ignites. A wreck cools in the dark. A structure changes hands. A pilot vanishes
+            from one system and appears in another. Names shift, routes open, routes die, and half
+            the truth is usually buried before anyone knows what happened.
+          </p>
+          <p>Black Relay exists to catch what can still be caught.</p>
+          <p>
+            Its public systems gather world data, source fragments, killmails, routes, structures,
+            entities, materials and field reports, then bind them to provenance before they become
+            rumour. The Registry is the record. The API is the signal line. The status layer is the
+            heartbeat. Nothing is treated as truth simply because it was repeated loudly enough.
+          </p>
+          <p>
+            Every record carries its weight: verified, probable, reported, stale or unknown. The
+            difference matters. A clean signal can move ships. A bad signal can burn them.
+          </p>
+          <p>
+            Beyond the public terminal, Black Relay may act in the field. Route intelligence,
+            logistics, transport coordination, field support and contracted operations all belong
+            to the same doctrine: know the path, mark the risk, move with purpose.
+          </p>
+          <p>Black Relay does not claim to see the whole frontier.</p>
+          <p>
+            It watches the signal.<br />
+            It records what survives.<br />
+            It carries what must move.
+          </p>
+        </div>
+        <div class="mission-side">
+          <aside class="objective-panel terminal-record" aria-label="Objective">
+            <span class="terminal-label">OBJECTIVE</span>
+            <p>
+              Catch the fragments that survive the dark, bind them to source, and keep the signal
+              moving before rumour takes the field.
+            </p>
+          </aside>
+          <aside class="identity-panel terminal-record" aria-label="Operator identity">
+            <span class="terminal-label">OPERATOR</span>
+            <p>
+              Black Relay is maintained by
+              <a href={siteConfig.identity.founderUrl} {...externalLinkAttrs(siteConfig.identity.founderUrl)}>
+                {siteConfig.identity.founderName}</a
+              > and
+              <a
+                href={siteConfig.identity.operatorGroupUrl}
+                {...externalLinkAttrs(siteConfig.identity.operatorGroupUrl)}
+              >
+                {siteConfig.identity.operatorGroup}</a
+              >.
+            </p>
+            <p class="identity-panel__lore">
+              Overseen by {siteConfig.identity.founderLoreName}, {
+                siteConfig.identity.founderTitle
+              }.
+            </p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="principles-title">
+      <div class="section-head">
+        <span class="section-number">04 //</span>
+        <h2 class="section-title" id="principles-title">PRINCIPLES</h2>
+      </div>
+      <div class="principle-grid">
+        {principles.map((principle) => <PrincipleCard {...principle} />)}
+      </div>
+    </section>
+
+    <EndpointMap />
+    <ScopePanel />
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .system-ledger {
+    display: grid;
+    border-bottom: 1px solid rgba(254, 71, 0, 0.24);
+  }
+
+  .mission-grid {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .mission-side {
+    display: grid;
+    gap: 1rem;
+    align-self: start;
+  }
+
+  .mission-grid p {
+    max-width: 760px;
+    margin: 0 0 1rem;
+    color: #d3ccc5;
+    font-size: clamp(1.05rem, 2vw, 1.28rem);
+  }
+
+  .objective-panel,
+  .identity-panel {
+    align-self: start;
+    padding: clamp(1rem, 3vw, 1.35rem);
+    border-bottom: 1px solid rgba(254, 71, 0, 0.24);
+  }
+
+  .objective-panel p,
+  .identity-panel p {
+    margin: 0.85rem 0 0;
+    color: #f4f1ec;
+    font-family: var(--mono);
+    font-size: 0.95rem;
+  }
+
+  .identity-panel__lore {
+    color: #9b928a !important;
+    font-size: 0.78rem !important;
+  }
+
+  .identity-panel a {
+    color: #f4f1ec;
+    text-decoration: underline;
+    text-decoration-color: rgba(254, 71, 0, 0.72);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18em;
+    transition:
+      color 160ms ease,
+      text-decoration-color 160ms ease;
+  }
+
+  .identity-panel a:hover {
+    color: #fe4700;
+    text-decoration-color: #fe4700;
+  }
+
+  .principle-grid {
+    display: grid;
+    gap: 0.5rem 1.5rem;
+  }
+
+  @media (min-width: 760px) {
+    .principle-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .mission-grid {
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 0.45fr);
+      align-items: start;
+    }
+
+  }
+</style>

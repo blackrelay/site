@@ -1,0 +1,104 @@
+---
+import { siteConfig } from "../config/site";
+import { externalLinkAttrs } from "../utils/links";
+
+const links = [
+  ["API", siteConfig.endpoints.api],
+  ["API DOCS", siteConfig.endpoints.docs],
+  ["STATUS", siteConfig.endpoints.status],
+  ["COMMS", siteConfig.discordInviteUrl],
+  ["SOURCE VAULT", siteConfig.githubOrgUrl],
+] as const;
+---
+
+<footer class="site-footer">
+  <div>
+    <strong>© Black Relay</strong>
+    <p class="maintainer-line">
+      {siteConfig.identity.formalMaintainerLead}
+      <a href={siteConfig.identity.founderUrl} {...externalLinkAttrs(siteConfig.identity.founderUrl)}>
+        {siteConfig.identity.founderName}</a
+      > and
+      <a
+        href={siteConfig.identity.contributorsUrl}
+        {...externalLinkAttrs(siteConfig.identity.contributorsUrl)}
+      >
+        {siteConfig.identity.contributorsLabel}</a
+      >.
+    </p>
+    <p>
+      Not affiliated with CCP Games, Fenris Creations, EVE Frontier or any related rights holders.
+      EVE and related marks belong to their owners.
+    </p>
+  </div>
+  <nav aria-label="Footer">
+    {links.map(([label, href]) => <a href={href} {...externalLinkAttrs(href)}>{label}</a>)}
+  </nav>
+</footer>
+
+<style>
+  .site-footer {
+    display: grid;
+    gap: 0.8rem;
+    width: min(var(--content-width), calc(100% - 2rem));
+    margin-inline: auto;
+    padding: 1.15rem 0 1.75rem;
+    border-top: 1px solid rgba(254, 71, 0, 0.24);
+    color: #9b928a;
+  }
+
+  strong {
+    display: block;
+    margin-bottom: 0.35rem;
+    color: #f4f1ec;
+    font-family: var(--mono);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  p {
+    max-width: 620px;
+    margin: 0 0 0.32rem;
+    line-height: 1.45;
+  }
+
+  p:last-of-type {
+    margin-bottom: 0;
+  }
+
+  .maintainer-line a {
+    color: #9b928a;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    letter-spacing: inherit;
+    text-decoration: underline;
+    text-decoration-color: rgba(254, 71, 0, 0.72);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18em;
+  }
+
+  .maintainer-line a:hover {
+    color: #fe4700;
+    text-decoration-color: #fe4700;
+  }
+
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.42rem 0.72rem;
+  }
+
+  a {
+    color: #9b928a;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: #fe4700;
+  }
+</style>

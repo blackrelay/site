@@ -1,0 +1,108 @@
+---
+import { siteConfig } from "../config/site";
+import { externalLinkAttrs } from "../utils/links";
+
+const rootUrl = `https://${siteConfig.domain}`;
+---
+
+<section class="section endpoint-section" aria-labelledby="endpoint-title">
+  <div class="section-head">
+    <span class="section-number">05 //</span>
+    <h2 class="section-title" id="endpoint-title">ENDPOINT MAP</h2>
+  </div>
+  <div class="endpoint-map">
+    <a class="map-row map-root" href={rootUrl} {...externalLinkAttrs(rootUrl)}>
+      <span class="map-node">blackrelay.network</span>
+      <span class="map-label">ROOT NODE</span>
+    </a>
+    <div class="map-children">
+      <a class="map-row" href={siteConfig.endpoints.api}>
+        <span class="branch">├─</span>
+        <span class="map-node">api.blackrelay.network</span>
+        <span class="map-label">PUBLIC API</span>
+      </a>
+      <a class="map-row" href={siteConfig.endpoints.registry}>
+        <span class="branch">├─</span>
+        <span class="map-node">registry.blackrelay.network</span>
+        <span class="map-label">REGISTRY TERMINAL</span>
+      </a>
+      <a class="map-row" href={siteConfig.endpoints.docs}>
+        <span class="branch">├─</span>
+        <span class="map-node">docs.blackrelay.network</span>
+        <span class="map-label">API DOCS</span>
+      </a>
+      <a class="map-row" href={siteConfig.endpoints.status}>
+        <span class="branch">└─</span>
+        <span class="map-node">status.blackrelay.network</span>
+        <span class="map-label">OPERATIONS STATUS</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .endpoint-map {
+    border-block: 1px solid rgba(254, 71, 0, 0.28);
+    padding: clamp(1rem, 4vw, 2rem);
+    background:
+      linear-gradient(
+        90deg,
+        rgba(254, 71, 0, 0.082) 0%,
+        rgba(254, 71, 0, 0.052) 58%,
+        rgba(254, 71, 0, 0.018) 100%
+      ),
+      rgba(0, 0, 0, 0.48);
+    font-family: var(--mono);
+  }
+
+  .map-children {
+    display: grid;
+    gap: 0.55rem;
+    margin-top: 0.85rem;
+    padding-left: clamp(0.5rem, 3vw, 1.6rem);
+  }
+
+  .map-row {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 0.6rem 1rem;
+    align-items: baseline;
+    min-height: 2.5rem;
+    color: #f4f1ec;
+    text-decoration: none;
+  }
+
+  .map-root {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .map-node {
+    overflow-wrap: anywhere;
+  }
+
+  .branch,
+  .map-label {
+    color: #fe4700;
+  }
+
+  .map-label {
+    justify-self: start;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+  }
+
+  .map-row:hover .map-node {
+    color: #fe4700;
+  }
+
+  @media (min-width: 720px) {
+    .map-row {
+      grid-template-columns: auto minmax(0, 1fr) auto;
+    }
+
+    .map-root {
+      grid-template-columns: minmax(0, 1fr) auto;
+    }
+  }
+</style>

@@ -1,0 +1,268 @@
+---
+import { siteConfig } from "../config/site";
+import { externalLinkAttrs } from "../utils/links";
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero-frame">
+    <div class="hero-rail hero-rail--left" aria-hidden="true"></div>
+    <div class="hero-rail hero-rail--right" aria-hidden="true"></div>
+
+    <div class="hero-meta" aria-label="Signal identity">
+      <span>SIG//BLACK RELAY</span>
+      <span class="hero-meta__dot"></span>
+      <span>PUBLIC INFRASTRUCTURE NODE</span>
+    </div>
+
+    <div class="hero-mark" aria-hidden="true">
+      <span class="hero-ring hero-ring--outer pulse-signal"></span>
+      <span class="hero-ring hero-ring--inner"></span>
+      <img class="hero-logo" src="/logo.png" alt="" width="320" height="320" />
+    </div>
+
+    <div class="hero-title-block">
+      <h1 id="hero-title"><span>Black</span> <span>Relay</span></h1>
+      <p class="hero-copy">
+        Black Relay is an EVE Frontier relay network for public data, route intelligence, logistics
+        and field operations.
+      </p>
+    </div>
+
+    <div class="hero-console">
+      <div class="hero-actions">
+        <a class="terminal-button" data-variant="solid" href={siteConfig.endpoints.registry}>
+          OPEN REGISTRY
+        </a>
+        <a class="terminal-button" href={siteConfig.endpoints.docs}>READ API DOCS</a>
+        <a
+          class="terminal-button"
+          href={siteConfig.discordInviteUrl}
+          {...externalLinkAttrs(siteConfig.discordInviteUrl)}
+        >
+          OPEN COMMS
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    display: grid;
+    min-height: clamp(34rem, calc(88svh - 4.25rem), 43rem);
+    align-items: center;
+    width: min(var(--content-width), calc(100% - 2rem));
+    margin-inline: auto;
+    padding-block: clamp(2.25rem, 6vw, 4.25rem);
+  }
+
+  .hero-frame {
+    position: relative;
+    display: grid;
+    justify-items: center;
+    gap: clamp(0.9rem, 2vw, 1.15rem);
+    overflow: hidden;
+    width: 100%;
+    min-width: 0;
+    min-height: min(100%, 42rem);
+    padding: clamp(1rem, 3vw, 2rem);
+    text-align: center;
+  }
+
+  .hero-frame::before,
+  .hero-frame::after {
+    position: absolute;
+    inset-inline: clamp(0rem, 3vw, 2rem);
+    height: 1px;
+    content: "";
+    background: linear-gradient(90deg, transparent, rgba(254, 71, 0, 0.68), transparent);
+  }
+
+  .hero-frame::before {
+    top: 0;
+  }
+
+  .hero-frame::after {
+    bottom: 0;
+  }
+
+  .hero-rail {
+    position: absolute;
+    top: clamp(2rem, 8vw, 7rem);
+    bottom: clamp(2rem, 8vw, 7rem);
+    width: 1px;
+    background: linear-gradient(180deg, transparent, rgba(254, 71, 0, 0.62), transparent);
+    opacity: 0.9;
+  }
+
+  .hero-rail--left {
+    left: 0;
+  }
+
+  .hero-rail--right {
+    right: 0;
+  }
+
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 100%;
+    gap: 0.55rem 0.85rem;
+    color: #fe4700;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .hero-meta span:not(.hero-meta__dot) {
+    min-width: 0;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  .hero-meta__dot {
+    width: 0.42rem;
+    height: 0.42rem;
+    margin-top: 0.27rem;
+    border: 1px solid #fe4700;
+    border-radius: 999px;
+    background: rgba(254, 71, 0, 0.32);
+  }
+
+  .hero-mark {
+    position: relative;
+    display: grid;
+    width: min(17rem, 58vw);
+    aspect-ratio: 1;
+    place-items: center;
+    margin-top: clamp(0.35rem, 2vw, 1rem);
+  }
+
+  .hero-ring {
+    position: absolute;
+    border: 1px solid rgba(254, 71, 0, 0.34);
+    border-radius: 999px;
+    box-shadow: inset 0 0 38px rgba(254, 71, 0, 0.08);
+  }
+
+  .hero-ring--outer {
+    inset: 0;
+  }
+
+  .hero-ring--inner {
+    inset: 13%;
+    border-color: rgba(254, 71, 0, 0.2);
+  }
+
+  .hero-logo {
+    position: relative;
+    z-index: 1;
+    width: 62%;
+    object-fit: contain;
+    filter: drop-shadow(0 0 18px rgba(254, 71, 0, 0.2));
+  }
+
+  .hero-title-block {
+    display: grid;
+    justify-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    min-width: 0;
+  }
+
+  h1 {
+    margin: 0;
+    font-family: var(--mono);
+    font-size: clamp(2.7rem, 8.6vw, 7.2rem);
+    line-height: 0.82;
+    text-transform: uppercase;
+  }
+
+  h1 span {
+    display: inline-block;
+  }
+
+  .hero-copy {
+    width: min(760px, 100%);
+    margin: 0;
+    color: #f4f1ec;
+    font-size: clamp(1.02rem, 1.65vw, 1.24rem);
+    overflow-wrap: anywhere;
+  }
+
+  .hero-console {
+    display: grid;
+    gap: 0.85rem;
+    width: min(900px, 100%);
+    margin-top: clamp(0.35rem, 2vw, 0.9rem);
+    padding-top: 1rem;
+    border-top: 1px solid rgba(254, 71, 0, 0.2);
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+
+  .hero-actions {
+    margin-top: 0.2rem;
+  }
+
+  @media (max-width: 520px) {
+    .hero {
+      width: 100%;
+      padding-inline: 1rem;
+    }
+
+    .hero-frame {
+      min-height: 0;
+      padding-inline: 0;
+    }
+
+    .hero-meta {
+      width: min(20rem, calc(100vw - 2rem));
+      padding-inline: 0.75rem;
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+    }
+
+    .hero-mark {
+      width: min(14rem, 72vw);
+    }
+
+    .hero-title-block {
+      width: min(21rem, calc(100vw - 2rem));
+      padding-inline: 1rem;
+    }
+
+    h1 {
+      display: grid;
+      gap: 0.14em;
+      font-size: clamp(2.85rem, 15vw, 4rem);
+      line-height: 0.78;
+    }
+
+    .hero-copy {
+      width: min(19.5rem, 100%);
+      font-size: 0.94rem;
+      line-height: 1.5;
+    }
+
+    .hero-console {
+      width: calc(100vw - 2rem);
+    }
+
+    .hero-actions {
+      width: 100%;
+    }
+
+    .hero-actions .terminal-button {
+      width: 100%;
+    }
+  }
+</style>

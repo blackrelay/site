@@ -1,0 +1,35 @@
+---
+interface Props {
+  title: string;
+  body: string;
+}
+
+const { title, body } = Astro.props;
+---
+
+<article class="principle-card terminal-record">
+  <h3>{title}</h3>
+  <p>{body}</p>
+</article>
+
+<style>
+  .principle-card {
+    display: grid;
+    gap: 0.55rem;
+    min-height: 100%;
+    padding: 1rem 1.1rem;
+  }
+
+  h3 {
+    margin: 0 0 0.5rem;
+    color: #f4f1ec;
+    font-family: var(--mono);
+    font-size: 1rem;
+    text-transform: uppercase;
+  }
+
+  p {
+    margin: 0;
+    color: #b9b0a8;
+  }
+</style>
