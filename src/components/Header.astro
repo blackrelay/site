@@ -35,7 +35,8 @@ import { externalLinkAttrs } from "../utils/links";
 
 <style>
   .site-header {
-    z-index: 20;
+    position: relative;
+    z-index: 200;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -105,6 +106,11 @@ import { externalLinkAttrs } from "../utils/links";
 
   .mobile-nav {
     position: relative;
+    z-index: 210;
+  }
+
+  .mobile-nav[open] {
+    z-index: 220;
   }
 
   .mobile-nav summary {
@@ -119,6 +125,7 @@ import { externalLinkAttrs } from "../utils/links";
 
   .mobile-nav nav {
     position: absolute;
+    z-index: 230;
     right: 0;
     top: calc(100% + 0.65rem);
     display: grid;
