@@ -39,7 +39,7 @@ export const navItems = [
   { label: "HOME", href: "/" },
   { label: "REGISTRY", href: siteConfig.endpoints.registry },
   { label: "API", href: siteConfig.endpoints.api },
-  { label: "API DOCS", href: siteConfig.endpoints.docs },
+  { label: "DEV DOCS", href: siteConfig.endpoints.docs },
   { label: "STATUS", href: siteConfig.endpoints.status },
   { label: "COMMS", href: siteConfig.discordInviteUrl },
 ] as const;

@@ -50,7 +50,7 @@ Primary URLs:
 - Home: https://blackrelay.network/
 - API: https://api.blackrelay.network/
 - Registry: https://registry.blackrelay.network/
-- API docs: https://docs.blackrelay.network/
+- Developer Docs:: https://docs.blackrelay.network/
 - Status: https://status.blackrelay.network/
 - Comms: https://discord.gg/mvG5nmDU95
 
