@@ -16,7 +16,7 @@ const HOME_DISCOVERY_LINK_HEADER = [
 const STATIC_CSP = [
   "upgrade-insecure-requests",
   "default-src 'none'",
-  "script-src 'self' https://static.cloudflareinsights.com/beacon.min.js",
+  "script-src 'self' https://static.cloudflareinsights.com/beacon.min.js https://ajax.cloudflare.com",
   "script-src-attr 'none'",
   "style-src 'self'",
   "style-src-attr 'none'",
@@ -77,7 +77,7 @@ function buildHtmlCsp(nonce) {
   return [
     "upgrade-insecure-requests",
     "default-src 'none'",
-    `script-src 'self' 'nonce-${nonce}' https://static.cloudflareinsights.com/beacon.min.js`,
+    `script-src 'self' 'nonce-${nonce}' https://static.cloudflareinsights.com/beacon.min.js https://ajax.cloudflare.com`,
     "script-src-attr 'none'",
     `style-src 'self' 'nonce-${nonce}'`,
     "style-src-attr 'none'",
