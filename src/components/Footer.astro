@@ -16,10 +16,11 @@ const links = [
   <div>
     <strong>© Black Relay</strong>
     <p class="maintainer-line">
-      {siteConfig.identity.formalMaintainerLead}
+      {siteConfig.identity.formalMaintainerLead}{" "}
       <a href={siteConfig.identity.founderUrl} {...externalLinkAttrs(siteConfig.identity.founderUrl)}>
         {siteConfig.identity.founderName}</a
-      > and
+      >{" "}
+      and{" "}
       <a
         href={siteConfig.identity.contributorsUrl}
         {...externalLinkAttrs(siteConfig.identity.contributorsUrl)}
