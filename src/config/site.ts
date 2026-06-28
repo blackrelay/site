@@ -8,6 +8,7 @@ export const siteConfig = {
   eveFrontierReferralUrl: "https://evefrontier.com/en?ref=blackrelay",
   eveFrontierReferralCode: "blackrelay",
   githubOrgUrl: "https://github.com/blackrelay",
+  statusApiUrl: "https://status.blackrelay.network/api/status.json",
   identity: {
     founderName: "Hēi",
     founderUrl: "https://github.com/heinotfound",
@@ -27,10 +28,10 @@ export const siteConfig = {
     status: "https://status.blackrelay.network",
   },
   systemStates: {
-    registry: "BUILDING",
-    api: "COMPLETE",
-    docs: "BUILDING",
-    status: "BOOTSTRAPPING",
+    registry: "CHECKING",
+    api: "CHECKING",
+    docs: "CHECKING",
+    status: "CHECKING",
   },
 } as const;
 

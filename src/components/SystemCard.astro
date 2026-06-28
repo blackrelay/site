@@ -5,15 +5,36 @@ interface Props {
   summary: string;
   state: string;
   href: string;
+  serviceId: string;
 }
 
 import { externalLinkAttrs } from "../utils/links";
 
-const { number, name, summary, state, href } = Astro.props;
+const { number, name, summary, state, href, serviceId } = Astro.props;
 const host = href.replace(/^https?:\/\//, "");
+const stateTone = toneForState(state);
+
+function toneForState(value: string): string {
+  const normalised = value.toLowerCase().replace(/\s+/g, "_");
+  if (normalised === "online") {
+    return "online";
+  }
+  if (normalised === "service_bad" || normalised === "degraded") {
+    return "service_bad";
+  }
+  if (normalised === "offline") {
+    return "offline";
+  }
+  return "default";
+}
 ---
 
-<article class="system-card terminal-record">
+<article
+  class="system-card terminal-record"
+  data-system={name.toLowerCase()}
+  data-status-card={serviceId}
+  data-state-tone={stateTone}
+>
   <div class="system-card__index">
     <span>{number} //</span>
   </div>
@@ -24,7 +45,7 @@ const host = href.replace(/^https?:\/\//, "");
   <dl>
     <div>
       <dt>STATE</dt>
-      <dd>{state}</dd>
+      <dd class="system-card__state" data-status-state>{state}</dd>
     </div>
     <div>
       <dt>LINK</dt>
@@ -91,6 +112,18 @@ const host = href.replace(/^https?:\/\//, "");
     font-family: var(--mono);
     font-size: 0.72rem;
     text-align: right;
+  }
+
+  [data-state-tone="online"] .system-card__state {
+    color: #35d07f;
+  }
+
+  [data-state-tone="service_bad"] .system-card__state {
+    color: #facc15;
+  }
+
+  [data-state-tone="offline"] .system-card__state {
+    color: #ff4d4d;
   }
 
   a {
