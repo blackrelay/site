@@ -94,6 +94,17 @@ function buildHtmlCsp(nonce) {
   ].join("; ");
 }
 
+class ScriptAttributeHandler {
+  constructor(nonce) {
+    this.nonce = nonce;
+  }
+
+  element(element) {
+    element.setAttribute("data-cfasync", "false");
+    element.setAttribute("nonce", this.nonce);
+  }
+}
+
 class NonceAttributeHandler {
   constructor(nonce) {
     this.nonce = nonce;
@@ -226,7 +237,7 @@ function withCommonHeaders(response, url) {
   headers.set("Content-Security-Policy", buildHtmlCsp(nonce));
 
   const rewrittenResponse = new HTMLRewriter()
-    .on("script", new NonceAttributeHandler(nonce))
+    .on("script", new ScriptAttributeHandler(nonce))
     .on("style", new NonceAttributeHandler(nonce))
     .transform(response);
 
