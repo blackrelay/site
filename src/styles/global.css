@@ -1,9 +1,58 @@
-@import "@fontsource-variable/space-grotesk";
-@import "@fontsource-variable/jetbrains-mono";
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "Space Grotesk Variable";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 300 700;
+  src: url("@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2")
+    format("woff2-variations");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Space Grotesk Variable";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 300 700;
+  src: url("@fontsource-variable/space-grotesk/files/space-grotesk-latin-ext-wght-normal.woff2")
+    format("woff2-variations");
+  unicode-range:
+    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+    U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF,
+    U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: "JetBrains Mono Variable";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 800;
+  src: url("@fontsource-variable/jetbrains-mono/files/jetbrains-mono-latin-wght-normal.woff2")
+    format("woff2-variations");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "JetBrains Mono Variable";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 800;
+  src: url("@fontsource-variable/jetbrains-mono/files/jetbrains-mono-latin-ext-wght-normal.woff2")
+    format("woff2-variations");
+  unicode-range:
+    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+    U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF,
+    U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
 
 :root {
   color-scheme: dark;
@@ -182,6 +231,58 @@ summary {
 
 .skip-link:focus {
   top: 1rem;
+}
+
+.not-found-banner {
+  position: relative;
+  z-index: 50;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 0.75rem;
+  align-items: center;
+  width: min(var(--content-width), calc(100% - 2rem));
+  margin: 1rem auto 0;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid rgba(254, 71, 0, 0.48);
+  background:
+    linear-gradient(90deg, rgba(254, 71, 0, 0.12), rgba(5, 5, 5, 0.94)),
+    rgba(5, 5, 5, 0.94);
+  box-shadow: 0 0 32px rgba(254, 71, 0, 0.1);
+  color: var(--text-primary);
+}
+
+.not-found-banner[hidden] {
+  display: none;
+}
+
+.not-found-banner__code,
+.not-found-banner__link {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.not-found-banner__code {
+  color: var(--frontier-orange);
+}
+
+.not-found-banner p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.not-found-banner__link {
+  color: var(--text-primary);
+  text-decoration: underline;
+  text-decoration-color: rgba(254, 71, 0, 0.72);
+  text-underline-offset: 0.2em;
+}
+
+.not-found-banner__link:hover {
+  color: var(--frontier-orange);
 }
 
 .site-shell {
@@ -377,6 +478,12 @@ summary {
 @media (prefers-reduced-motion: no-preference) {
   .pulse-signal {
     animation: pulse-signal 3.8s ease-in-out infinite;
+  }
+}
+
+@media (max-width: 620px) {
+  .not-found-banner {
+    grid-template-columns: 1fr;
   }
 }
 

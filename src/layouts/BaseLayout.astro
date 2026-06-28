@@ -8,11 +8,17 @@ import spaceGroteskLatin from "@fontsource-variable/space-grotesk/files/space-gr
 interface Props {
   title?: string;
   description?: string;
+  robots?: string;
+  canonical?: string | null;
+  trackLastGoodPage?: boolean;
 }
 
 const {
   title = "Black Relay | EVE Frontier Relay Network",
   description = siteConfig.description,
+  robots = "index, follow",
+  canonical = `https://${siteConfig.domain}/`,
+  trackLastGoodPage = true,
 } = Astro.props;
 ---
 
@@ -24,8 +30,9 @@ const {
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="robots" content={robots} />
     <meta name="theme-color" content="#fe4700" />
-    <link rel="canonical" href={`https://${siteConfig.domain}/`} />
+    {canonical && <link rel="canonical" href={canonical} />}
     <link rel="icon" type="image/png" href="/logo.png" />
     <link rel="preload" href="/logo.png" as="image" type="image/png" />
     <link rel="preload" href={spaceGroteskLatin} as="font" type="font/woff2" crossorigin />
@@ -61,11 +68,52 @@ const {
       content="An EVE Frontier relay network for public data, route intelligence, logistics and field operations."
     />
   </head>
-  <body>
+  <body data-track-last-good-page={trackLastGoodPage ? "true" : "false"}>
     <a class="skip-link" href="#main">Skip to content</a>
+    <aside class="not-found-banner" data-not-found-banner hidden aria-live="polite">
+      <span class="not-found-banner__code">404 //</span>
+      <p data-not-found-message>
+        Requested signal was not found. Returned to the last known relay page.
+      </p>
+      <a href="/" class="not-found-banner__link">Home</a>
+    </aside>
     <div class="site-shell">
       <slot />
     </div>
     <ScrollTopButton />
+    <script is:inline>
+      (() => {
+        const storageKey = "blackrelay:last-good-path";
+        const body = document.body;
+        const shouldTrack = body?.dataset.trackLastGoodPage === "true";
+        const currentPath = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+        const params = new URLSearchParams(window.location.search);
+        const notFoundPath = params.get("not_found");
+
+        if (notFoundPath) {
+          const banner = document.querySelector("[data-not-found-banner]");
+          const message = document.querySelector("[data-not-found-message]");
+
+          if (banner && message) {
+            message.textContent = `404: ${notFoundPath} was not found. Returned to the last known relay page.`;
+            banner.removeAttribute("hidden");
+          }
+
+          const cleanUrl = new URL(window.location.href);
+          cleanUrl.searchParams.delete("not_found");
+          window.history.replaceState({}, "", `${cleanUrl.pathname}${cleanUrl.search}${cleanUrl.hash}`);
+        }
+
+        if (!shouldTrack || notFoundPath) {
+          return;
+        }
+
+        try {
+          window.sessionStorage.setItem(storageKey, currentPath || "/");
+        } catch {
+          // Some browser privacy modes disable sessionStorage. Navigation still works without it.
+        }
+      })();
+    </script>
   </body>
 </html>

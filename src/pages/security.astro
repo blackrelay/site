@@ -1,0 +1,119 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { siteConfig } from "../config/site";
+import { securityPolicyMarkdown } from "../content/security-policy";
+
+const policyHtml = securityPolicyMarkdown
+  .trim()
+  .split(/\n{2,}/)
+  .map((block) => {
+    if (block.startsWith("# ")) {
+      return { type: "heading", text: block.replace(/^#\s+/, "") };
+    }
+
+    if (block.startsWith("- ")) {
+      return {
+        type: "list",
+        items: block
+          .split("\n")
+          .filter((line) => line.startsWith("- "))
+          .map((line) => line.replace(/^-\s+/, "")),
+      };
+    }
+
+    return { type: "paragraph", text: block };
+  });
+
+const renderInlineCode = (text: string) =>
+  text.split(/(`[^`]+`)/g).map((part) => {
+    if (part.startsWith("`") && part.endsWith("`")) {
+      return { type: "code", text: part.slice(1, -1) };
+    }
+
+    return { type: "text", text: part };
+  });
+---
+
+<BaseLayout
+  title="Security Policy | Black Relay"
+  description="Security reporting policy for the public Black Relay website."
+  canonical={`https://${siteConfig.domain}/security/`}
+>
+  <main id="main" class="section security-page" aria-labelledby="security-title">
+    <section class="terminal-panel security-page__panel">
+      <span class="terminal-label">SECURITY // SITE</span>
+      {
+        policyHtml.map((block) => {
+          if (block.type === "heading") {
+            return <h1 id="security-title">{block.text}</h1>;
+          }
+
+          if (block.type === "list") {
+            return (
+              <ul>
+                {block.items?.map((item) => (
+                  <li>
+                    {renderInlineCode(item).map((part) =>
+                      part.type === "code" ? <code>{part.text}</code> : <>{part.text}</>,
+                    )}
+                  </li>
+                ))}
+              </ul>
+            );
+          }
+
+          return (
+            <p>
+              {renderInlineCode(block.text ?? "").map((part) =>
+                part.type === "code" ? <code>{part.text}</code> : <>{part.text}</>,
+              )}
+            </p>
+          );
+        })
+      }
+      <a class="terminal-button" href="/security.md">Read Markdown</a>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .security-page {
+    min-height: 70vh;
+  }
+
+  .security-page__panel {
+    max-width: 860px;
+    padding: clamp(1.25rem, 4vw, 2rem);
+  }
+
+  h1 {
+    margin: 0.8rem 0 1rem;
+    font-family: var(--mono);
+    font-size: clamp(1.55rem, 4vw, 2.45rem);
+    line-height: 1.15;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+
+  p,
+  li {
+    color: var(--text-muted);
+  }
+
+  p {
+    max-width: 44rem;
+  }
+
+  ul {
+    display: grid;
+    gap: 0.5rem;
+    margin: 1rem 0 1.5rem;
+    padding-left: 1.2rem;
+  }
+
+  code {
+    color: var(--text-primary);
+    font-family: var(--mono);
+    font-size: 0.92em;
+  }
+</style>

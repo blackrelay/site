@@ -1,0 +1,78 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const title = "404 | Black Relay";
+const description = "The requested Black Relay signal could not be found.";
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  robots="noindex, nofollow"
+  canonical={null}
+  trackLastGoodPage={false}
+>
+  <main id="main" class="section not-found-page" aria-labelledby="not-found-title">
+    <section class="terminal-panel not-found-page__panel">
+      <span class="terminal-label">404 // SIGNAL LOST</span>
+      <h1 id="not-found-title">Returning to the last known relay page.</h1>
+      <p>
+        If the redirect does not complete, return to the Black Relay home terminal.
+      </p>
+      <a class="terminal-button" href="/">Return Home</a>
+    </section>
+  </main>
+  <script is:inline>
+    (() => {
+      const storageKey = "blackrelay:last-good-path";
+      const missingPath = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+      let targetPath = "/";
+
+      try {
+        const storedPath = window.sessionStorage.getItem(storageKey);
+        if (
+          storedPath &&
+          storedPath.startsWith("/") &&
+          !storedPath.startsWith("//") &&
+          storedPath !== missingPath
+        ) {
+          targetPath = storedPath;
+        }
+      } catch {
+        targetPath = "/";
+      }
+
+      const targetUrl = new URL(targetPath, window.location.origin);
+      targetUrl.searchParams.set("not_found", missingPath || "/404");
+      window.location.replace(targetUrl.toString());
+    })();
+  </script>
+</BaseLayout>
+
+<style>
+  .not-found-page {
+    min-height: 70vh;
+    display: grid;
+    align-items: center;
+  }
+
+  .not-found-page__panel {
+    max-width: 720px;
+    padding: clamp(1.25rem, 4vw, 2rem);
+  }
+
+  .not-found-page h1 {
+    margin: 0.8rem 0 0;
+    font-family: var(--mono);
+    font-size: clamp(1.55rem, 4vw, 2.4rem);
+    line-height: 1.15;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+
+  .not-found-page p {
+    max-width: 34rem;
+    margin: 1rem 0 1.5rem;
+    color: var(--text-muted);
+  }
+</style>

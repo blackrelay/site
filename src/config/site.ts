@@ -28,7 +28,7 @@ export const siteConfig = {
   },
   systemStates: {
     registry: "BUILDING",
-    api: "BUILDING",
+    api: "COMPLETE",
     docs: "BUILDING",
     status: "BOOTSTRAPPING",
   },
