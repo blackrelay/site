@@ -217,7 +217,7 @@ function withCommonHeaders(response, url) {
 
   const dictionaryMatch = getDictionaryMatch(url.pathname);
   if (dictionaryMatch && response.status === 200) {
-    headers.set("Use-As-Dictionary", `match="${dictionaryMatch}", type="raw"`);
+    headers.set("Use-As-Dictionary", `match="${dictionaryMatch}", type=raw`);
   }
 
   if (isHomepage(url) && response.status === 200) {
