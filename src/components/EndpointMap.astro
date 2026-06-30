@@ -7,34 +7,34 @@ const rootUrl = `https://${siteConfig.domain}`;
 
 <section class="section endpoint-section" aria-labelledby="endpoint-title">
   <div class="section-head">
-    <span class="section-number">05 //</span>
-    <h2 class="section-title" id="endpoint-title">ENDPOINT MAP</h2>
+    <span class="section-number">07 //</span>
+    <h2 class="section-title" id="endpoint-title">Public endpoints</h2>
   </div>
   <div class="endpoint-map">
     <a class="map-row map-root" href={rootUrl} {...externalLinkAttrs(rootUrl)}>
       <span class="map-node">blackrelay.network</span>
-      <span class="map-label">ROOT NODE</span>
+      <span class="map-label">Home</span>
     </a>
     <div class="map-children">
       <a class="map-row" href={siteConfig.endpoints.api}>
         <span class="branch">├─</span>
         <span class="map-node">api.blackrelay.network</span>
-        <span class="map-label">PUBLIC API</span>
+        <span class="map-label">Public API</span>
       </a>
       <a class="map-row" href={siteConfig.endpoints.registry}>
         <span class="branch">├─</span>
         <span class="map-node">registry.blackrelay.network</span>
-        <span class="map-label">REGISTRY TERMINAL</span>
+        <span class="map-label">Registry explorer</span>
       </a>
       <a class="map-row" href={siteConfig.endpoints.docs}>
         <span class="branch">├─</span>
         <span class="map-node">docs.blackrelay.network</span>
-        <span class="map-label">DEV DOCS</span>
+        <span class="map-label">Developer docs</span>
       </a>
       <a class="map-row" href={siteConfig.endpoints.status}>
         <span class="branch">└─</span>
         <span class="map-node">status.blackrelay.network</span>
-        <span class="map-label">OPERATIONS STATUS</span>
+        <span class="map-label">Health and freshness</span>
       </a>
     </div>
   </div>

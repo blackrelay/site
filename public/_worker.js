@@ -44,13 +44,15 @@ const HTML_ENTITY_MAP = new Map([
 function llmsTxt() {
   return `# Black Relay
 
-Black Relay is an EVE Frontier relay network for public data, route intelligence, logistics and field operations.
+Black Relay is a public EVE Frontier API, Registry and developer documentation project.
+
+It normalises public Sui events, World API metadata and static client data into searchable, source-labelled records for builders and player tools.
 
 Primary URLs:
 - Home: https://blackrelay.network/
 - API: https://api.blackrelay.network/
 - Registry: https://registry.blackrelay.network/
-- Developer Docs:: https://docs.blackrelay.network/
+- Developer docs: https://docs.blackrelay.network/
 - Status: https://status.blackrelay.network/
 - Comms: https://discord.gg/mvG5nmDU95
 

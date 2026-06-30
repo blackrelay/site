@@ -116,15 +116,15 @@ body {
   background:
     radial-gradient(
       circle at 50% -8rem,
-      rgba(254, 71, 0, 0.2),
+      rgba(254, 71, 0, 0.12),
       transparent 30rem
     ),
     radial-gradient(
       circle at 10% 16rem,
-      rgba(254, 71, 0, 0.08),
+      rgba(254, 71, 0, 0.045),
       transparent 18rem
     ),
-    linear-gradient(180deg, rgba(254, 71, 0, 0.055), transparent 34rem), #000;
+    linear-gradient(180deg, rgba(254, 71, 0, 0.035), transparent 34rem), #000;
   color: var(--text-primary);
   font-family: var(--sans);
   line-height: 1.6;
@@ -148,12 +148,12 @@ body::before {
   pointer-events: none;
   content: "";
   background-image:
-    linear-gradient(to right, rgba(254, 71, 0, 0.16) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(254, 71, 0, 0.12) 1px, transparent 1px);
+    linear-gradient(to right, rgba(254, 71, 0, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(254, 71, 0, 0.08) 1px, transparent 1px);
   background-position: 50% 0;
   background-size: 92px 92px;
   mask-image: radial-gradient(ellipse at top, #000 0%, transparent 70%);
-  opacity: 0.34;
+  opacity: 0.22;
 }
 
 body::after {
@@ -406,15 +406,13 @@ summary {
   transition:
     border-color 160ms ease,
     background 160ms ease,
-    color 160ms ease,
-    box-shadow 160ms ease;
+    color 160ms ease;
 }
 
 .terminal-button:hover {
   border-color: var(--border-strong);
   background: rgba(254, 71, 0, 0.12);
   color: var(--frontier-orange);
-  box-shadow: 0 0 24px rgba(254, 71, 0, 0.16);
 }
 
 .terminal-button[data-variant="solid"] {
@@ -425,21 +423,6 @@ summary {
 
 .terminal-button[data-variant="solid"]:hover {
   color: #000;
-}
-
-.terminal-button::before,
-.terminal-button::after {
-  color: var(--frontier-orange);
-}
-
-.terminal-button::before {
-  content: "[";
-  margin-right: 0.6rem;
-}
-
-.terminal-button::after {
-  content: "]";
-  margin-left: 0.6rem;
 }
 
 .relay-line {

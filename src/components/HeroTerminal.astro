@@ -1,6 +1,5 @@
 ---
 import { siteConfig } from "../config/site";
-import { externalLinkAttrs } from "../utils/links";
 ---
 
 <section class="hero" aria-labelledby="hero-title">
@@ -9,9 +8,11 @@ import { externalLinkAttrs } from "../utils/links";
     <div class="hero-rail hero-rail--right" aria-hidden="true"></div>
 
     <div class="hero-meta" aria-label="Signal identity">
-      <span>SIG//BLACK RELAY</span>
+      <span>Public API</span>
       <span class="hero-meta__dot"></span>
-      <span>PUBLIC INFRASTRUCTURE NODE</span>
+      <span>Registry</span>
+      <span class="hero-meta__dot"></span>
+      <span>Developer docs</span>
     </div>
 
     <div class="hero-mark" aria-hidden="true">
@@ -23,24 +24,22 @@ import { externalLinkAttrs } from "../utils/links";
     <div class="hero-title-block">
       <h1 id="hero-title"><span>Black</span> <span>Relay</span></h1>
       <p class="hero-copy">
-        Black Relay is an EVE Frontier relay network for public data, route intelligence, logistics
-        and field operations.
+        Black Relay is a public EVE Frontier API and Registry.
+      </p>
+      <p class="hero-subcopy">
+        It normalises public Sui events, World API metadata and static client data into
+        searchable, source-labelled records for builders and player tools.
       </p>
     </div>
 
     <div class="hero-console">
       <div class="hero-actions">
         <a class="terminal-button" data-variant="solid" href={siteConfig.endpoints.registry}>
-          OPEN REGISTRY
+          Search Registry
         </a>
-        <a class="terminal-button" href={siteConfig.endpoints.docs}>READ DEV DOCS</a>
-        <a
-          class="terminal-button"
-          href={siteConfig.discordInviteUrl}
-          {...externalLinkAttrs(siteConfig.discordInviteUrl)}
-        >
-          OPEN COMMS
-        </a>
+        <a class="terminal-button" href={siteConfig.endpoints.docs}>Read Docs</a>
+        <a class="terminal-button" href={siteConfig.endpoints.api}>View API</a>
+        <a class="terminal-button" href={siteConfig.endpoints.status}>Status</a>
       </div>
     </div>
   </div>
@@ -49,7 +48,7 @@ import { externalLinkAttrs } from "../utils/links";
 <style>
   .hero {
     display: grid;
-    min-height: clamp(34rem, calc(88svh - 4.25rem), 43rem);
+    min-height: clamp(27rem, calc(72svh - 4.25rem), 36rem);
     align-items: center;
     width: min(var(--content-width), calc(100% - 2rem));
     margin-inline: auto;
@@ -135,7 +134,7 @@ import { externalLinkAttrs } from "../utils/links";
   .hero-mark {
     position: relative;
     display: grid;
-    width: min(17rem, 58vw);
+    width: min(12rem, 42vw);
     aspect-ratio: 1;
     place-items: center;
     margin-top: clamp(0.35rem, 2vw, 1rem);
@@ -189,7 +188,16 @@ import { externalLinkAttrs } from "../utils/links";
     width: min(760px, 100%);
     margin: 0;
     color: #f4f1ec;
-    font-size: clamp(1.02rem, 1.65vw, 1.24rem);
+    font-size: clamp(1.08rem, 1.7vw, 1.35rem);
+    font-weight: 600;
+    overflow-wrap: anywhere;
+  }
+
+  .hero-subcopy {
+    width: min(820px, 100%);
+    margin: 0;
+    color: #b9b0a8;
+    font-size: clamp(1rem, 1.45vw, 1.16rem);
     overflow-wrap: anywhere;
   }
 
@@ -232,7 +240,7 @@ import { externalLinkAttrs } from "../utils/links";
     }
 
     .hero-mark {
-      width: min(14rem, 72vw);
+      width: min(11rem, 58vw);
     }
 
     .hero-title-block {
@@ -247,7 +255,8 @@ import { externalLinkAttrs } from "../utils/links";
       line-height: 0.78;
     }
 
-    .hero-copy {
+    .hero-copy,
+    .hero-subcopy {
       width: min(19.5rem, 100%);
       font-size: 0.94rem;
       line-height: 1.5;

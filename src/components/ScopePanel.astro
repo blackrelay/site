@@ -1,24 +1,37 @@
 ---
 const currentScope = [
-  "public world-data registry",
-  "source-aware entity records",
-  "event and killmail resolution",
-  "API contracts",
-  "source and confidence policy",
-  "operational status reporting",
+  "entities, systems, items, events and killmails",
+  "structures, sources, facts and relations",
+  "public API and Registry explorer",
+  "developer documentation",
+  "source, confidence and freshness labels",
+  "public exports and operational status",
+];
+
+const knownGaps = [
+  "some source windows can be stale while upstream indexers catch up",
+  "static client names and type metadata are patch-sensitive",
+  "coverage is incomplete where public sources do not expose enough context",
+  "the API is not transaction authority",
 ];
 ---
 
 <section class="section" aria-labelledby="scope-title">
   <div class="section-head">
-    <span class="section-number">06 //</span>
-    <h2 class="section-title" id="scope-title">SCOPE://CURRENT</h2>
+    <span class="section-number">05 //</span>
+    <h2 class="section-title" id="scope-title">Current scope</h2>
   </div>
   <div class="scope-grid">
     <div class="scope-list terminal-record">
-      <h3>CURRENT</h3>
+      <h3>Covered data</h3>
       <ul>
         {currentScope.map((item) => <li>{item}</li>)}
+      </ul>
+    </div>
+    <div class="scope-list terminal-record">
+      <h3>Known gaps</h3>
+      <ul>
+        {knownGaps.map((item) => <li>{item}</li>)}
       </ul>
     </div>
   </div>
@@ -28,6 +41,12 @@ const currentScope = [
   .scope-grid {
     display: grid;
     gap: 1rem;
+  }
+
+  @media (min-width: 760px) {
+    .scope-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
 
   .scope-list {

@@ -16,7 +16,7 @@ const systems = [
     number: "01",
     name: "REGISTRY",
     summary:
-      "Canonical source-aware world data: entities, systems, items, killmails, structures and source evidence.",
+      "Public explorer for entities, systems, items, killmails, structures and source evidence.",
     state: siteConfig.systemStates.registry,
     href: siteConfig.endpoints.registry,
     serviceId: "registry",
@@ -49,121 +49,147 @@ const systems = [
 
 const principles = [
   {
-    title: "SOURCE FIRST",
+    title: "Source stays attached",
     body: "Every published record should point back to where it came from.",
   },
   {
-    title: "CONFIDENCE LABELLED",
+    title: "Confidence is visible",
     body: "Verified, probable, reported, stale and unknown stay visually distinct.",
   },
   {
-    title: "PUBLIC BY DEFAULT",
-    body: "Public game data should be usable without private gatekeeping.",
+    title: "Current cycle comes first",
+    body: "Cycle 6 Stillness records are the default public view.",
   },
   {
-    title: "NO PRIVATE INTEL",
-    body: "Black Relay is not a doxxing system, spy ledger or private operational tracker.",
+    title: "Private intel is out of scope",
+    body: "Black Relay does not publish private Discord intel, wallet secrets or unverifiable alt accusations.",
+  },
+  {
+    title: "Direct reads before transactions",
+    body: "Re-read live Frontier and Sui state before signing, sponsoring, deploying or mutating anything.",
   },
 ];
+
+const currentState = [
+  ["API", "public read-only"],
+  ["Registry", "public explorer"],
+  ["Docs", "public"],
+  ["Environment", "Stillness"],
+  ["Cycle", "6"],
+  ["Indexer", "active"],
+  ["Static client data", "imported"],
+  ["Data freshness", "mixed"],
+  ["Known gaps", "patch-sensitive names/types"],
+] as const;
+
+const apiExamples = [
+  "GET /v1/health",
+  "GET /v1/entities",
+  "GET /v1/events",
+  "GET /v1/types/:id",
+  "GET /v1/sources",
+  "GET /v1/ops/freshness",
+] as const;
 ---
 
 <BaseLayout>
   <Header />
   <main id="main">
     <HeroTerminal />
-    <AccessPanel />
+
+    <section class="section" aria-labelledby="current-state-title">
+      <div class="section-head">
+        <span class="section-number">01 //</span>
+        <h2 class="section-title" id="current-state-title">Current state</h2>
+      </div>
+      <div class="state-grid">
+        {
+          currentState.map(([label, value]) => (
+            <article class="state-card terminal-record">
+              <span>{label}</span>
+              <strong>{value}</strong>
+            </article>
+          ))
+        }
+      </div>
+      <p class="trust-note">
+        Black Relay indexes public or source-labelled data only. It is a read layer, not
+        transaction authority. Frontier data can change after patches or cycle resets, so check
+        source, cycle and timestamp before relying on a record.
+      </p>
+    </section>
 
     <section class="section" aria-labelledby="systems-title">
       <div class="section-head">
         <span class="section-number">02 //</span>
-        <h2 class="section-title" id="systems-title">SYSTEMS ONLINE</h2>
+        <h2 class="section-title" id="systems-title">Live surfaces</h2>
       </div>
       <div class="system-ledger">
         {systems.map((system) => <SystemCard {...system} />)}
       </div>
     </section>
 
-    <section class="section mission-section" aria-labelledby="mission-title">
+    <section class="section api-section" aria-labelledby="api-title">
       <div class="section-head">
         <span class="section-number">03 //</span>
-        <h2 class="section-title" id="mission-title">MISSION://PUBLIC_SIGNAL</h2>
+        <h2 class="section-title" id="api-title">Try the API</h2>
       </div>
-      <div class="mission-grid">
-        <div>
-          <p>The frontier speaks in broken signals.</p>
+      <div class="api-grid">
+        <div class="api-copy">
           <p>
-            A gate ignites. A wreck cools in the dark. A structure changes hands. A pilot vanishes
-            from one system and appears in another. Names shift, routes open, routes die, and half
-            the truth is usually buried before anyone knows what happened.
+            These are real public endpoints. They return source-labelled Registry exports from
+            Cloudflare and should be treated as read-side data.
           </p>
-          <p>Black Relay exists to catch what can still be caught.</p>
-          <p>
-            Its public systems gather world data, source fragments, killmails, routes, structures,
-            entities, materials and field reports, then bind them to provenance before they become
-            rumour. The Registry is the record. The API is the signal line. The status layer is the
-            heartbeat. Nothing is treated as truth simply because it was repeated loudly enough.
-          </p>
-          <p>
-            Every record carries its weight: verified, probable, reported, stale or unknown. The
-            difference matters. A clean signal can move ships. A bad signal can burn them.
-          </p>
-          <p>
-            Beyond the public terminal, Black Relay may act in the field. Route intelligence,
-            logistics, transport coordination, field support and contracted operations all belong
-            to the same doctrine: know the path, mark the risk, move with purpose.
-          </p>
-          <p>Black Relay does not claim to see the whole frontier.</p>
-          <p>
-            It watches the signal.<br />
-            It records what survives.<br />
-            It carries what must move.
-          </p>
+          <a class="terminal-button" href={siteConfig.endpoints.docs}>Read API docs</a>
         </div>
-        <div class="mission-side">
-          <aside class="objective-panel terminal-record" aria-label="Objective">
-            <span class="terminal-label">OBJECTIVE</span>
-            <p>
-              Catch the fragments that survive the dark, bind them to source, and keep the signal
-              moving before rumour takes the field.
-            </p>
-          </aside>
-          <aside class="identity-panel terminal-record" aria-label="Operator identity">
-            <span class="terminal-label">OPERATOR</span>
-            <p>
-              Black Relay is maintained by{" "}
-              <a href={siteConfig.identity.founderUrl} {...externalLinkAttrs(siteConfig.identity.founderUrl)}>
-                {siteConfig.identity.founderName}</a
-              >{" "}
-              and{" "}
-              <a
-                href={siteConfig.identity.operatorGroupUrl}
-                {...externalLinkAttrs(siteConfig.identity.operatorGroupUrl)}
-              >
-                {siteConfig.identity.operatorGroup}</a
-              >.
-            </p>
-            <p class="identity-panel__lore">
-              Overseen by {siteConfig.identity.founderLoreName}, {
-                siteConfig.identity.founderTitle
-              }.
-            </p>
-          </aside>
-        </div>
+        <ul class="api-list" aria-label="Example API routes">
+          {apiExamples.map((example) => <li><code>{example}</code></li>)}
+        </ul>
       </div>
     </section>
 
     <section class="section" aria-labelledby="principles-title">
       <div class="section-head">
         <span class="section-number">04 //</span>
-        <h2 class="section-title" id="principles-title">PRINCIPLES</h2>
+        <h2 class="section-title" id="principles-title">Data rules</h2>
       </div>
       <div class="principle-grid">
         {principles.map((principle) => <PrincipleCard {...principle} />)}
       </div>
     </section>
 
-    <EndpointMap />
     <ScopePanel />
+    <section class="section mission-section" aria-labelledby="mission-title">
+      <div class="section-head">
+        <span class="section-number">06 //</span>
+        <h2 class="section-title" id="mission-title">Mission</h2>
+      </div>
+      <div class="mission-grid">
+        <div>
+          <p>
+            The frontier speaks in broken signals. Black Relay records public EVE Frontier data
+            from Sui events, World API metadata and static client data, then keeps source,
+            confidence and freshness attached so builders can see what was checked, what is stale
+            and what needs another read. The Registry is the public record, the API is the read
+            layer and the status page shows whether the signal is current. Black Relay does not
+            claim to see the whole frontier; it records what can be checked before rumour hardens
+            into fact.
+          </p>
+        </div>
+        <aside class="identity-panel terminal-record" aria-label="Maintainers">
+          <span class="terminal-label">Maintainers</span>
+          <p>
+            Maintained by{" "}
+            <a href={siteConfig.identity.founderUrl} {...externalLinkAttrs(siteConfig.identity.founderUrl)}>
+              {siteConfig.identity.founderName}</a
+            >{" "}
+            and Black Relay contributors.
+          </p>
+        </aside>
+      </div>
+    </section>
+    <EndpointMap />
+    <AccessPanel />
   </main>
   <Footer />
   <script is:inline define:vars={{ statusApiUrl: siteConfig.statusApiUrl }}>
@@ -180,15 +206,66 @@ const principles = [
     border-bottom: 1px solid rgba(254, 71, 0, 0.24);
   }
 
+  .state-grid,
+  .api-grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .state-grid {
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  }
+
+  .state-card {
+    display: grid;
+    gap: 0.35rem;
+    padding: 1rem;
+  }
+
+  .state-card span,
+  .api-list code {
+    color: #fe4700;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+  }
+
+  .state-card strong {
+    color: #f4f1ec;
+    font-family: var(--mono);
+    font-size: 0.95rem;
+    font-weight: 700;
+  }
+
+  .trust-note,
+  .api-copy p {
+    max-width: 820px;
+    color: #b9b0a8;
+  }
+
+  .trust-note {
+    margin: 1.25rem 0 0;
+  }
+
+  .api-list {
+    display: grid;
+    gap: 0.55rem;
+    margin: 0;
+    padding: 1rem;
+    border: 1px solid rgba(254, 71, 0, 0.18);
+    background: rgba(5, 5, 5, 0.72);
+    list-style: none;
+  }
+
+  .api-list code {
+    color: #f4f1ec;
+    font-size: 0.84rem;
+  }
+
   .mission-grid {
     display: grid;
     gap: 1.25rem;
-  }
-
-  .mission-side {
-    display: grid;
-    gap: 1rem;
-    align-self: start;
   }
 
   .mission-grid p {
@@ -198,24 +275,17 @@ const principles = [
     font-size: clamp(1.05rem, 2vw, 1.28rem);
   }
 
-  .objective-panel,
   .identity-panel {
     align-self: start;
     padding: clamp(1rem, 3vw, 1.35rem);
     border-bottom: 1px solid rgba(254, 71, 0, 0.24);
   }
 
-  .objective-panel p,
   .identity-panel p {
     margin: 0.85rem 0 0;
     color: #f4f1ec;
     font-family: var(--mono);
     font-size: 0.95rem;
-  }
-
-  .identity-panel__lore {
-    color: #9b928a !important;
-    font-size: 0.78rem !important;
   }
 
   .identity-panel a {
@@ -240,7 +310,8 @@ const principles = [
   }
 
   @media (min-width: 760px) {
-    .principle-grid {
+    .principle-grid,
+    .api-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 

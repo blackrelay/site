@@ -14,7 +14,7 @@ interface Props {
 }
 
 const {
-  title = "Black Relay | EVE Frontier Relay Network",
+  title = "Black Relay | Public EVE Frontier API and Registry",
   description = siteConfig.description,
   robots = "index, follow",
   canonical = `https://${siteConfig.domain}/`,
@@ -55,18 +55,12 @@ const {
       }
     </script>
     <meta property="og:title" content="Black Relay" />
-    <meta
-      property="og:description"
-      content="An EVE Frontier relay network for public data, route intelligence, logistics and field operations."
-    />
+    <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={`https://${siteConfig.domain}/`} />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="Black Relay" />
-    <meta
-      name="twitter:description"
-      content="An EVE Frontier relay network for public data, route intelligence, logistics and field operations."
-    />
+    <meta name="twitter:description" content={description} />
   </head>
   <body data-track-last-good-page={trackLastGoodPage ? "true" : "false"}>
     <a class="skip-link" href="#main">Skip to content</a>

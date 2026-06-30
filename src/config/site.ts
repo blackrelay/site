@@ -2,7 +2,7 @@ export const siteConfig = {
   name: "Black Relay",
   domain: "blackrelay.network",
   description:
-    "Black Relay is an EVE Frontier relay network for public data, route intelligence, logistics and field operations.",
+    "Public EVE Frontier API, Registry and developer docs for source-labelled data from Sui events, World API metadata and static client data.",
   // Public invite/referral values only. These are not secrets and should not use private environment variables.
   discordInviteUrl: "https://discord.gg/mvG5nmDU95",
   eveFrontierReferralUrl: "https://evefrontier.com/en?ref=blackrelay",
@@ -12,8 +12,6 @@ export const siteConfig = {
   identity: {
     founderName: "Hēi",
     founderUrl: "https://github.com/heinotfound",
-    founderLoreName: "Hei Warden",
-    founderTitle: "The One True Seer",
     operatorGroup: "The Seers",
     operatorGroupUrl: "https://github.com/orgs/blackrelay/people",
     formalMaintainerLead:
@@ -36,10 +34,11 @@ export const siteConfig = {
 } as const;
 
 export const navItems = [
-  { label: "HOME", href: "/" },
-  { label: "REGISTRY", href: siteConfig.endpoints.registry },
+  { label: "Home", href: "/" },
+  { label: "Registry", href: siteConfig.endpoints.registry },
   { label: "API", href: siteConfig.endpoints.api },
-  { label: "DEV DOCS", href: siteConfig.endpoints.docs },
-  { label: "STATUS", href: siteConfig.endpoints.status },
-  { label: "COMMS", href: siteConfig.discordInviteUrl },
+  { label: "Docs", href: siteConfig.endpoints.docs },
+  { label: "Status", href: siteConfig.endpoints.status },
+  { label: "GitHub", href: siteConfig.githubOrgUrl },
+  { label: "Discord", href: siteConfig.discordInviteUrl },
 ] as const;
